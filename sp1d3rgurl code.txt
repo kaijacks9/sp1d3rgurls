@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Sp1d3rgurl!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle, #ffcccb, #ffabab);
+            color: #fff;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        h1 {
+            font-size: 3em;
+            margin: 0.5em 0;
+        }
+        p {
+            font-size: 1.5em;
+            margin: 0.5em 0;
+        }
+        .graphic {
+            width: 100px;
+            height: auto;
+            margin: 20px;
+        }
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Birthday, Sp1d3rgurl! 🎊🎈</h1>
+    <p>Hope your day is filled with joy and laughter! 🎉</p>
+     <p>Enjoy your special day! 🎂❤️</p>
+    <p>May your day be as speacial as you❤️</p>
+<P> FROM KHALIL </P>
+    <div class="confetti">
+        <canvas id="confettiCanvas"></canvas>
+    </div>
+
+    <audio id="confettiSound" src="path/to/your/confetti-sound.mp3" preload="auto"></audio>
+
+    <script>
+        const canvas = document.getElementById('confettiCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const colors = ['#ffcc00', '#00ccff', '#ff3399', '#ff6600', '#66ff00'];
+        const particles = [];
+        const sound = document.getElementById('confettiSound');
+
+        class ConfettiParticle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height - canvas.height; // Start above
+                this.size = Math.random() * 6 + 4;
+                this.speedY = Math.random() * 3 + 2; // Falling speed
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                sound.currentTime = 0; // Reset sound
+                sound.play(); // Play sound when the particle is created
+            }
+
+            update() {
+                this.y += this.speedY; // Move down
+                if (this.y > canvas.height) this.y = -this.size; // Reset when it goes off screen
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < 150; i++) {
+                particles.push(new ConfettiParticle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+    </script>
+</body>
+</html>
